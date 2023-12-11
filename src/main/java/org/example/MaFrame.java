@@ -8,8 +8,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MaFrame extends JFrame implements MouseListener, ActionListener {
-    public MaFrame(){
-        setSize(500,300);
+    public MaFrame() {
+        setSize(500, 300);
         setTitle("Voila une fenetre");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -36,11 +36,11 @@ public class MaFrame extends JFrame implements MouseListener, ActionListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        this.getContentPane().setBackground(Color.BLUE);
+        this.getContentPane().setBackground(Color.WHITE);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        this.getContentPane().setBackground(Color.GREEN);
+        this.getContentPane().setBackground(Color.WHITE);
     }
 }
