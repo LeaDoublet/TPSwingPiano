@@ -33,6 +33,7 @@ public class Main extends JFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     playNote(key.getMidiNote(), 0);
+                    System.out.println(key.getMidiNote());
                 }
             });
             pianoPanel.add(key);
