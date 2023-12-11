@@ -4,9 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.sound.midi.*;
 
-public class Main extends JFrame implements KeyListener {
+public class Main extends JFrame {
 
     private static final int[] MIDI_NOTES = {60, 62, 64, 65, 67, 69, 71, 72}; // Corresponding to C4 to C5
 
@@ -27,38 +29,23 @@ public class Main extends JFrame implements KeyListener {
 
         for (int i = 0; i < MIDI_NOTES.length; i++) {
             Touche key = new Touche(String.valueOf(i + 1), MIDI_NOTES[i]);
-            key.addKeyListener(this);
+            key.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    playNote(key.getMidiNote(), 0);
+                }
+            });
             pianoPanel.add(key);
         }
         fenetre.add(pianoPanel);
         fenetre.setVisible(true);
-        fenetre.addKeyListener(this);
+
     }
 
     public static void main(String[] args) {
         new Main();
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // Ignored for this example
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getSource() instanceof Touche) {
-            Touche key = (Touche) e.getSource();
-            int note = key.getMidiNote();
-            System.out.println("Note: " + note + ", MIDI: " + note);
-            playNote(note, 0);
-
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // Ignored for this example
-    }
 
     public void playNote(int finalNote, int finalInstrument) {
         new Thread(new Runnable() {
